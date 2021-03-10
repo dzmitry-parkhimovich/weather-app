@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { PageContainer, PageContent, PageLoader } from 'components';
+import { SearchBar, TodayWeatherCard } from 'widgets';
 import { useWeatherData } from 'hooks';
-import { SearchBar } from 'widgets';
 
 const App: React.FC = () => {
   const { todayWeather, loading, onSubmit } = useWeatherData();
@@ -13,7 +13,9 @@ const App: React.FC = () => {
       <PageContent>
         {loading && <PageLoader>Loading...</PageLoader>}
         {todayWeather && !loading && (
-          <div />
+          <React.Fragment>
+            <TodayWeatherCard weather={todayWeather} />
+          </React.Fragment>
         )}
       </PageContent>
     </PageContainer>

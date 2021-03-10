@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  width: 100%;
-  max-width: 700px;
-  margin: 50px auto;
+  background-color: white;
+  padding: 20px 40px;
+  border-radius: 8px;
 
   @media (max-width: 768px) {
-    margin: 30px auto;
+    padding: 20px;
   }
 `;

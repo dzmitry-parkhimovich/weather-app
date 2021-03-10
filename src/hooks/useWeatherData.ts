@@ -1,22 +1,26 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react';
+
+import { fetchTodayWeather } from 'api';
 
 interface IUseWeatherData {
   loading: boolean
-  error?: Error
   todayWeather: any
   onSubmit: (zipCode: string) => void
 }
 
 const useWeatherData = (): IUseWeatherData => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error>();
-  const [todayWeather, setTodayWeather] = useState();
+  const [todayWeather, setTodayWeather] = useState<IWeatherData>();
 
-  const searchByZipCode = useCallback(async (zipCode: string) => {
+  const searchByZipCode = useCallback(async (zip: string) => {
     try {
       setLoading(true)
+      setTodayWeather(undefined)
+      const weather = await fetchTodayWeather({ zip })
+      console.log(weather)
+      setTodayWeather(weather)
     } catch (error) {
-      setError(error)
+      alert(error.message)
     } finally {
       setLoading(false)
     }
@@ -27,7 +31,6 @@ const useWeatherData = (): IUseWeatherData => {
   }, [searchByZipCode])
 
   return {
-    error,
     loading,
     todayWeather,
     onSubmit,
