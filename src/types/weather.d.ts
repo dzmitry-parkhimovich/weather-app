@@ -51,8 +51,65 @@ declare interface IWeatherData {
   wind: IWind
 }
 
-declare interface ITodayWeatherParams {
-  zip: string
+declare interface IDailyFeelsLike {
+  day: number
+  eve: number
+  morn: number
+  night: number
+}
+
+declare interface IDailyTemp {
+  day: number
+  eve: number
+  max: number
+  min: number
+  morn: number
+  night: number
+}
+
+declare interface IDailyCondition {
+  id: number
+  icon: string
+  description: string
+  main: string
+}
+
+declare interface IDailyWeather {
+  clouds: number
+  dew_point: number
+  dt: number
+  feels_like: IDailyFeelsLike
+  humidity: number
+  pop: number
+  pressure: number
+  sunrise: number
+  sunset: number
+  temp: IDailyTemp
+  uvi: number
+  weather: IDailyCondition[]
+  wind_deg: number
+  wind_speed: number
+}
+
+declare interface IForecastWeatherData {
+  daily: IDailyWeather[]
+  lat: number
+  lon: number
+  timezone: string
+  timezone_offset: number
+}
+
+declare interface IWeatherParams {
   units?: 'standart' | 'metric' | 'imperial'
   lang?: string
+}
+
+declare interface ITodayWeatherParams extends IWeatherParams {
+  zip: string
+}
+
+declare interface IForeCastWeatherParams extends IWeatherParams {
+  lat: number
+  lon: number
+  exclude?: string
 }
